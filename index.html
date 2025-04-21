@@ -118,7 +118,7 @@
             font-family: 'Lato', sans-serif;
         }
         .logo img {
-            height: 50px;
+            height: 30px;
         }
         .header-right {
             display: flex;
@@ -228,20 +228,49 @@
             background-color: #0041c4;
         }
         .hero-image {
-            max-width: 420px;
-            position: relative;
-            z-index: 1;
-            clip-path: polygon(
-                50% 0%,
-                90% 25%,
-                75% 75%,
-                25% 75%,
-                10% 25%
-            );
-            box-shadow: none;
-            overflow: visible;
-            background: none;
-        }
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  clip-path: polygon(50% 0%, 90% 25%, 75% 75%, 25% 75%, 10% 25%);
+  box-shadow: none;
+  overflow: visible;
+  background: none;
+}
+.hero-image {
+  position: relative;
+}
+
+.hero-image img {
+  position: relative;
+  z-index: 2; /* Higher than decorative elements */
+}
+
+.hero-star, .hero-swirl, .hero-square {
+  position: absolute;
+  z-index: 1; /* Lower than the image but still visible */
+}
+
+/* Adjust positions */
+.hero-star {
+  left: -30px;
+  top: -20px;
+  width: 50px;
+  height: 50px;
+}
+
+.hero-swirl {
+  right: -50px;
+  bottom: -20px;
+  width: 120px;
+  height: 80px;
+}
+
+.hero-square {
+  right: 20px;
+  top: -15px;
+  width: 20px;
+  height: 20px;
+}
         .hero-image img {
             width: 100%;
             height: auto;
@@ -249,7 +278,7 @@
             display: block;
             object-fit: cover;
         }
-/*         .hero-image::before {
+        .hero-image::before {
             content: '';
             position: absolute;
             top: -20px;
@@ -269,8 +298,8 @@
                 2% 35%,
                 39% 35%
             );
-            z-index: -1;
-        } */
+            z-index: 1;
+        } 
         .hero-image::after {
             display: none;
         }
@@ -1152,6 +1181,12 @@
             max-width: 120px;
             display: block;
         }
+        /* Ensure Play Store icon matches Apple Store icon size */
+        .app-store-badge img[alt="Get it on Google Play"] {
+            max-width: 120px;
+            height: auto;
+            display: block;
+        }
         
         .footer-location {
             grid-column: 1 / -1;
@@ -1291,6 +1326,306 @@
         display: inline;
     }
     </style>
+    <style>
+        .collaborative-learning-section {
+          background-color: #f7f8fa;
+          padding: 60px 0;
+        }
+        
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+        
+        .flex-container {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .feature-image {
+          margin-bottom: 30px;
+          background-color: #e3f2fd;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-image img {
+          border-radius: 8px;
+          width: 100%;
+          height: auto;
+        }
+        
+        .feature-content {
+          padding: 0 15px;
+        }
+        
+        .new-badge {
+          background-color: #e3f2fd;
+          color: #1565c0;
+          padding: 5px 12px;
+          border-radius: 20px;
+          font-size: 14px;
+          font-weight: 600;
+          display: inline-block;
+        }
+        
+        .feature-title {
+          font-size: 28px;
+          font-weight: 700;
+          margin-top: 16px;
+          margin-bottom: 16px;
+          color: #333;
+        }
+        
+        .feature-description {
+          color: #555;
+          margin-bottom: 24px;
+          line-height: 1.6;
+        }
+        
+        .feature-list {
+          margin-bottom: 30px;
+          padding-left: 0;
+          list-style: none;
+        }
+        
+        .feature-list li {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 12px;
+        }
+        
+        .checkmark {
+          color: #4caf50;
+          margin-right: 10px;
+        }
+        
+        .button-container {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .primary-button {
+          background-color: #1a73e8;
+          color: white;
+          font-weight: 600;
+          padding: 12px 24px;
+          border-radius: 8px;
+          border: none;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.3s;
+          margin-bottom: 12px;
+          text-decoration: none;
+        }
+        
+        .primary-button:hover {
+          background-color: #1557b0;
+        }
+        
+        .secondary-button {
+          background-color: white;
+          color: #1a73e8;
+          font-weight: 600;
+          padding: 12px 24px;
+          border-radius: 8px;
+          border: 1px solid #1a73e8;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.3s;
+          text-decoration: none;
+        }
+        
+        .secondary-button:hover {
+          background-color: #f0f7ff;
+        }
+        
+        .button-icon {
+          margin-left: 8px;
+        }
+        
+        /* Sample Rooms Section */
+        .rooms-section {
+          padding: 60px 0;
+          background-color: white;
+        }
+        
+        .section-title {
+          font-size: 24px;
+          font-weight: 700;
+          text-align: center;
+          margin-bottom: 32px;
+          color: #333;
+        }
+        
+        .rooms-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 24px;
+          margin-bottom: 32px;
+        }
+        
+        .room-card {
+          border: 1px solid #e0e0e0;
+          border-radius: 8px;
+          padding: 20px;
+          transition: box-shadow 0.3s;
+        }
+        
+        .room-card:hover {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .room-header {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 16px;
+        }
+        
+        .room-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #333;
+          margin: 0 0 4px 0;
+        }
+        
+        .room-participants {
+          font-size: 14px;
+          color: #757575;
+          margin: 0;
+        }
+        
+        .room-status {
+          font-size: 12px;
+          padding: 4px 8px;
+          border-radius: 20px;
+          font-weight: 600;
+        }
+        
+        .status-active {
+          background-color: #e8f5e9;
+          color: #2e7d32;
+        }
+        
+        .status-scheduled {
+          background-color: #fff8e1;
+          color: #f57f17;
+        }
+        
+        .room-description {
+          font-size: 14px;
+          color: #555;
+          margin-bottom: 16px;
+          line-height: 1.5;
+        }
+        
+        .room-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .participant-avatars {
+          display: flex;
+        }
+        
+        .avatar {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid white;
+          margin-right: -8px;
+        }
+        
+        .avatar-more {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 2px solid white;
+          background-color: #f0f0f0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          color: #666;
+        }
+        
+        .room-action {
+          color: #1a73e8;
+          font-weight: 600;
+          font-size: 14px;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        
+        .room-action:hover {
+          color: #1557b0;
+        }
+        
+        .view-all {
+          text-align: center;
+          margin-top: 32px;
+        }
+        
+        .view-all-link {
+          display: inline-flex;
+          align-items: center;
+          color: #1a73e8;
+          font-weight: 600;
+          text-decoration: none;
+        }
+        
+        .view-all-link:hover {
+          color: #1557b0;
+        }
+        
+        .arrow-icon {
+          margin-left: 8px;
+        }
+        
+        /* Responsive styles */
+        @media (min-width: 768px) {
+          .flex-container {
+            flex-direction: row;
+            align-items: center;
+          }
+          
+          .feature-image {
+            flex: 1;
+            margin-bottom: 0;
+          }
+          
+          .feature-content {
+            flex: 1;
+            padding-left: 48px;
+          }
+          
+          .button-container {
+            flex-direction: row;
+          }
+          
+          .primary-button {
+            margin-right: 16px;
+            margin-bottom: 0;
+          }
+          
+          .rooms-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        
+        @media (min-width: 992px) {
+          .rooms-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+      </style>
 </head>
 <body>
     <header>
@@ -1326,21 +1661,157 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-image">
-            <img src="hero_student_collage_IN_2x.png" alt="Person smiling and learning">
+   <section class="hero">
+    <div class="hero-image">
+        <img src="hero_student_collage_IN_2x.png" alt="Person smiling and learning">
+        <!-- Decorative elements -->
+        <svg class="hero-star" viewBox="0 0 50 50" style="position: absolute; left: -30px; top: -20px; width: 50px; height: 50px; z-index: 10;">
+            <path fill="#FFC107" d="M25,2.5l4.5,14.5h14.5l-11.7,8.5l4.5,14.5L25,31.5l-11.7,8.5l4.5-14.5L6,17h14.5L25,2.5z"/>
+        </svg>
+        <svg class="hero-swirl" viewBox="0 0 120 80" style="position: absolute; right: -50px; bottom: -20px; width: 120px; height: 80px; z-index: 10;">
+            <path fill="none" stroke="#7edba3" stroke-width="3" d="M10,40 C30,10 60,80 110,20"/>
+        </svg>
+        <svg class="hero-square" viewBox="0 0 20 20" style="position: absolute; right: 20px; top: -15px; width: 20px; height: 20px; z-index: 10;">
+            <rect fill="#FF7A59" width="20" height="20" transform="rotate(15 10 10)"/>
+        </svg>
+    </div>
+    <div class="hero-left">
+        <h1 class="hero-title">For every student,<br> every classroom.<br> Real results.</h1>
+        <p class="hero-subtitle">We're a nonprofit with the mission to provide a free, world-class education for anyone, anywhere.</p>
+        <div class="hero-buttons">
+            <a href="#">Learners</a>
+            <a href="#">Teachers</a>
+            <a href="#">Parents</a>
         </div>
-        <div class="hero-left">
-            <h1 class="hero-title">For every student,<br> every classroom.<br> Real results.</h1>
-            <p class="hero-subtitle">We're a nonprofit with the mission to provide a free, world-class education for anyone, anywhere.</p>
-            <div class="hero-buttons">
-                <a href="#">Learners</a>
-                <a href="#">Teachers</a>
-                <a href="#">Parents</a>
+    </div>
+</section>
+    <section class="collaborative-learning-section">
+        <div class="container">
+          <div class="flex-container">
+            <!-- Left side: Image/Illustration -->
+            <div class="feature-image">
+              <img src="Screenshot 2025-04-21 163417.png" alt="Collaborative Learning Room Illustration">
             </div>
+            
+            <!-- Right side: Feature description and call-to-action -->
+            <div class="feature-content">
+              <span class="new-badge">NEW FEATURE</span>
+              <h2 class="feature-title">Real-Time Collaborative Learning Rooms</h2>
+              <p class="feature-description">
+                Connect with peers and solve problems together in our new interactive learning spaces. Share ideas, work through complex problems, and learn collaboratively—no matter where you are.
+              </p>
+              
+              <ul class="feature-list">
+                <li>
+                  <span class="checkmark">✓</span>
+                  <span>Interactive shared whiteboards</span>
+                </li>
+                <li>
+                  <span class="checkmark">✓</span>
+                  <span>Real-time group chat</span>
+                </li>
+                <li>
+                  <span class="checkmark">✓</span>
+                  <span>AI-powered hints and suggestions</span>
+                </li>
+                <li>
+                  <span class="checkmark">✓</span>
+                  <span>Perfect for study groups and remote classrooms</span>
+                </li>
+              </ul>
+              
+              <div class="button-container">
+                <a href="#" class="primary-button">
+                  <span>Create a Room</span>
+                  <span class="button-icon">+</span>
+                </a>
+                <a href="#" class="secondary-button">
+                  <span>Join a Room</span>
+                  <span class="button-icon">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
-
+      </section>
+      
+      <!-- Sample Rooms Preview Section -->
+      <section class="rooms-section">
+        <div class="container">
+          <h3 class="section-title">Popular Learning Rooms</h3>
+          
+          <div class="rooms-grid">
+            <!-- Room Card 1 -->
+            <div class="room-card">
+              <div class="room-header">
+                <div>
+                  <h4 class="room-title">Calculus Study Group</h4>
+                  <p class="room-participants">8 participants • Active now</p>
+                </div>
+                <span class="room-status status-active">Active</span>
+              </div>
+              <p class="room-description">Working through derivatives and integrals with peer assistance. Join to collaborate on problem sets.</p>
+              <div class="room-footer">
+                <div class="participant-avatars">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <div class="avatar-more">+5</div>
+                </div>
+                <a href="#" class="room-action">Join Room</a>
+              </div>
+            </div>
+            
+            <!-- Room Card 2 -->
+            <div class="room-card">
+              <div class="room-header">
+                <div>
+                  <h4 class="room-title">Physics Problem Solving</h4>
+                  <p class="room-participants">6 participants • Starts in 15 min</p>
+                </div>
+                <span class="room-status status-scheduled">Scheduled</span>
+              </div>
+              <p class="room-description">Teacher-led session on mechanics and Newton's laws with interactive demonstrations.</p>
+              <div class="room-footer">
+                <div class="participant-avatars">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <div class="avatar-more">+4</div>
+                </div>
+                <a href="#" class="room-action">Set Reminder</a>
+              </div>
+            </div>
+            
+            <!-- Room Card 3 -->
+            <div class="room-card">
+              <div class="room-header">
+                <div>
+                  <h4 class="room-title">Algebra Help Center</h4>
+                  <p class="room-participants">Open room • 12 participants</p>
+                </div>
+                <span class="room-status status-active">Active</span>
+              </div>
+              <p class="room-description">Drop in anytime for help with algebra homework and equations. Peer tutoring available.</p>
+              <div class="room-footer">
+                <div class="participant-avatars">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <img class="avatar" src="Screenshot user.png" alt="User">
+                  <div class="avatar-more">+9</div>
+                </div>
+                <a href="#" class="room-action">Join Room</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="view-all">
+            <a href="#" class="view-all-link">
+              View all learning rooms
+              <span class="arrow-icon">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
     <!-- Accordion Section -->
     <section class="accordion-courses-section">
         <div class="accordion">
@@ -1721,15 +2192,15 @@
     <!-- Donation CTA Section -->
     <section class="donation-cta-section">
         <div class="donation-content">
-            <h2 class="uppercase-subtitle" style="font-size: 0.9em; font-weight: 600; color: #666; letter-spacing: 1.5px; margin-bottom: 10px;">TOGETHER WE CAN MAKE A DIFFERENCE</h2>
             <div class="donation-block" style="display: flex; align-items: center; gap: 40px;">
                 <div class="donation-image" style="max-width: 420px; clip-path: polygon(50% 0%, 90% 25%, 75% 75%, 25% 75%, 10% 25%);">
                     <img src="math-unicorn-donate-collage.png" alt="Children learning" style="width: 100%; height: auto; border-radius: 0; object-fit: cover;">
                 </div>
                 <div class="donation-text" style="max-width: 480px; text-align: left;">
+                    <h3 style="font-size: 1.1em; font-weight: 600; color: #666; margin-bottom: 10px;">TOGETHER WE CAN MAKE A DIFFERENCE</h3>
                     <h1 class="underline-green" style="font-size: 2.6em; font-weight: 700; margin-bottom: 20px;">Every child deserves the chance to learn.</h1>
                     <p style="font-size: 1.2em; line-height: 1.6; color: #333; margin-bottom: 30px;">Across the globe, 617 million children are missing basic math and reading skills. We're a nonprofit delivering the education they need, and we need your help. You can change the course of a child's life.</p>
-                    <a href="#" class="hero-buttons" style="display: inline-block; padding: 14px 30px; background-color: #1865f2; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">Give them the chance</a>
+                    <a href="#" class="hero-buttons" style="display: inline-block; padding: 14px 30px; background-color: #1865f2; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease; margin-left: 20px;">Give them the chance</a>
                 </div>
             </div>
         </div>
