@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Khan Academy (Simplified Clone)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #fff;
+            padding: 15px 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            color: #1865f2;
+            font-weight: 600;
+            font-size: 1em;
+            gap: 12px;
+        }
+        .explore-dropdown {
+            position: relative;
+        }
+        .explore-button {
+            background: none;
+            border: none;
+            color: #1865f2;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1em;
+            gap: 4px;
+            font-family: 'Lato', sans-serif;
+        }
+        .explore-arrow {
+            font-size: 0.7em;
+            line-height: 1;
+        }
+        .explore-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            z-index: 10;
+            min-width: 120px;
+        }
+        .explore-dropdown:hover .explore-dropdown-content {
+            display: block;
+        }
+        .explore-dropdown-content a {
+            display: block;
+            padding: 5px 0;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: 12px;
+            position: relative;
+        }
+        .search-input {
+            padding: 8px 12px 8px 40px;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            font-size: 1em;
+            width: 180px;
+            outline: none;
+            color: #333;
+            height: 20px;
+            font-family: 'Lato', sans-serif;
+        }
+        .search-input::placeholder {
+            color: #1865f2;
+            opacity: 1;
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1865f2;
+            width: 18px;
+            height: 18px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo-text {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #21242c;
+            font-family: 'Lato', sans-serif;
+        }
+        .logo img {
+            height: 50px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .donate-button {
+            color: #1865f2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Lato', sans-serif;
+        }
+        .external-link-icon {
+            width: 14px;
+            height: 14px;
+            fill: #1865f2;
+            margin-left: 2px;
+        }
+        .login-button {
+            text-decoration: none;
+            color: #1865f2;
+            font-weight: 600;
+            font-size: 1em;
+            font-family: 'Lato', sans-serif;
+        }
+        .sign-up-button {
+            background-color: #1865f2;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em;
+            font-family: 'Lato', sans-serif;
+        }
+        /* HERO SECTION */
+        .hero {
+            background-color: #fff;
+            padding: 60px 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            position: relative;
+            overflow: visible;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 60px;
+            padding-right: 20px;
+        }
+        .hero-left {
+            text-align: left;
+            max-width: 480px;
+            z-index: 2;
+            margin-left: 60px;
+        }
+        .hero-title,
+        .hero-subtitle {
+            font-family: 'Lato', sans-serif;
+            color: #000;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+        .hero-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            position: relative;
+            max-width: 420px;
+        }
+.hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 183px;
+    height: 4px;
+    background-color: #7edba3;
+    border-radius: 2px;
+}
+        .hero-subtitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
+            color: #000;
+            margin-top: 10px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 420px;
+        }
+        .hero-buttons a {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #1865f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-right: 15px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .hero-buttons a:hover {
+            background-color: #0041c4;
+        }
+        .hero-image {
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+            clip-path: polygon(
+                50% 0%,
+                90% 25%,
+                75% 75%,
+                25% 75%,
+                10% 25%
+            );
+            box-shadow: none;
+            overflow: visible;
+            background: none;
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0;
+            display: block;
+            object-fit: cover;
+        }
+/*         .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -30px;
+            width: 30px;
+            height: 30px;
+            background: #f9a825;
+            clip-path: polygon(
+                50% 0%,
+                61% 35%,
+                98% 35%,
+                68% 57%,
+                79% 91%,
+                50% 70%,
+                21% 91%,
+                32% 57%,
+                2% 35%,
+                39% 35%
+            );
+            z-index: -1;
+        } */
+        .hero-image::after {
+            display: none;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /* ACCORDION STYLES */
+        .accordion-courses-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .accordion-courses-section h2 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.5em;
+            display: none;
+        }
+        .accordion {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .accordion-item {
+            background-color: #f5f5f5;
+            overflow: hidden;
+            margin-bottom: 0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 0;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 0;
+        }
+        .accordion-header.active {
+            background-color: #f0f0f0;
+        }
+        .accordion-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            background-color: #f8d775;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #888;
+            box-shadow: 0 0 4px rgba(136, 136, 136, 0.5);
+        }
+        .accordion-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .science-icon {
+            background-color: #67c28f;
+            border: 2px solid #888;
+            box-shadow: 0 0 4px rgba(136, 136, 136, 0.5);
+        }
+        .explore-icon {
+            background-color: #8c6acb;
+            border: 2px solid #888;
+            box-shadow: 0 0 4px rgba(136, 136, 136, 0.5);
+        }
+        .all-boards-icon {
+            background-color: #f8d775;
+            border: 2px solid #888;
+            box-shadow: 0 0 4px rgba(136, 136, 136, 0.5);
+        }
+        .educators-icon {
+            background-color: #fff;
+            border: 2px solid #888;
+            box-shadow: 0 0 4px rgba(136, 136, 136, 0.5);
+        }
+        .accordion-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+        .accordion-toggle {
+            font-size: 1.2em;
+        }
+        .accordion-content {
+            padding: 20px 20px 10px 85px;
+            display: block;
+        }
+        .class-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding-top: 10px;
+        }
+        @media (min-width: 768px) {
+            .class-list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .class-list a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 0;
+            font-size: 0.9em;
+            transition: color 0.2s ease;
+            display: block;
+        }
+        .class-list a:hover,
+        .class-list a.active {
+            color: #1865f2;
+        }
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 15px 0;
+            width: 100%;
+        }
+        .accordion-item:first-child .accordion-header {
+            border: 1px solid #1865f2;
+            border-radius: 8px;
+        }
+        /* WHY KHAN ACADEMY WORKS SECTION */
+        .why-khan-works {
+            background-color: #fff;
+            padding: 80px 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .why-khan-works h2 {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #21242c;
+            margin-bottom: 60px;
+            font-family: 'Lato', sans-serif;
+        }
+        .benefits-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .benefit-column {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            padding: 0 15px;
+        }
+        .benefit-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .benefit-icon img {
+            width: 100%;
+            height: auto;
+        }
+        .benefit-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #21242c;
+            margin-bottom: 20px;
+            font-family: 'Lato', sans-serif;
+        }
+        .benefit-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+            font-family: 'Lato', sans-serif;
+        }
+        /* TEACHER TESTIMONIAL SECTION - UPDATED TO MATCH SCREENSHOT */
+        .teacher-testimonial-section {
+            background-color: #fff;
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    .teacher-testimonial-section h2 {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            width: 50%;
+            margin-left: 52%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .teacher-testimonial-section cite {
+            font-size: 0.4em !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 100%;
+        }
+        .testimonial-block {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        .testimonial-image {
+            width: 50%;
+            position: relative;
+        }
+        .testimonial-image img {
+            width: 110%;
+            height: auto;
+            border-radius: 0;
+        }
+        .testimonial-text {
+            width: 50%;
+            text-align: left;
+        }
+        .testimonial-text blockquote {
+            margin: 0;
+            padding: 0;
+        }
+        .testimonial-text blockquote p {
+            font-size: 2.2em;
+            line-height: 1.2;
+            color: #21242c;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .divider-line {
+            height: 1px;
+            background-color: #e0e0e0;
+            width: 60px;
+            margin: 25px 0;
+        }
+        .testimonial-text cite {
+            font-style: normal;
+            font-size: 0.85em;
+            color: #666;
+            display: block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+        .teacher-info {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .teacher-button {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #1865f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .teacher-button:hover {
+            background-color: #0041c4;
+        }
+        /* LEARNERS SECTION - UPDATED TO MATCH SCREENSHOT */
+        .learners-section {
+            background-color: #fff;
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #f0f0f0;
+        }
+        .learners-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .learners-section h2 {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .learners-block {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 60px;
+        }
+        .learners-image {
+            width: 55%;
+            order: 2;
+        }
+        .learners-image img {
+            width: 100%;
+            height: auto;
+        }
+        .learners-text {
+            width: 45%;
+            text-align: left;
+            order: 1;
+        }
+        .learners-text h3 {
+            font-size: 2.6em;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        .learners-text h3::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            background-color: rgba(196, 232, 181, 0.4);
+            z-index: -1;
+            border-radius: 4px;
+        }
+        .learners-text p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .learners-button {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #1865f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .learners-button:hover {
+            background-color: #0041c4;
+        }
+        /* STUDENT TESTIMONIAL SECTION - UPDATED TO MATCH NEW SCREENSHOT */
+        .student-testimonial-section {
+            background-color: #f7f9fa;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .student-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            overflow: hidden;
+        }
+        .student-testimonial-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .student-quote {
+            flex: 1;
+            max-width: 65%;
+        }
+        .student-quote p {
+            font-size: 2.4em;
+            line-height: 1.3;
+            color: #333;
+            font-weight: 500;
+            margin: 0;
+            position: relative;
+        }
+        .student-quote p::before {
+            content: '“';
+            position: absolute;
+            left: -0.4em;
+            top: -0.1em;
+            font-size: 1.2em;
+        }
+        .student-quote p::after {
+            content: '”';
+            position: absolute;
+            margin-left: 0.1em;
+            font-size: 1.2em;
+        }
+        .student-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-right: 20px;
+        }
+        .student-name {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .student-location {
+            font-size: 0.9em;
+            color: #666;
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .student-image {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .student-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        .student-image::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background-color: #FF7A59;
+            border-radius: 50%;
+            top: -10px;
+            left: -10px;
+            z-index: 1;
+        }
+        @media (max-width: 980px) {
+            .student-testimonial-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 0 20px;
+            }
+            .student-quote {
+                max-width: 100%;
+                margin-bottom: 40px;
+            }
+            .student-info {
+                align-items: center;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            .student-name,
+            .student-location {
+                text-align: center;
+            }
+        }
+        /* DONATION CTA SECTION */
+        .donation-cta-section {
+            background-color: #fff;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #e0e0e0;
+        }
+        .donation-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .donation-cta-section h2 {
+            font-size: 1.8em;
+            color: #21242c;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .donation-block {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .donation-image {
+            width: 100%;
+        }
+        .donation-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .donation-text {
+            text-align: left;
+        }
+        .donation-text h3 {
+            font-size: 1.8em;
+            line-height: 1.4;
+            color: #21242c;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .donation-text p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .donation-button {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #1865f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .donation-button:hover {
+            background-color: #0041c4;
+        }
+        @media (min-width: 768px) {
+            .donation-block {
+                flex-direction: row;
+                align-items: center;
+            }
+            .donation-image {
+                width: 50%;
+            }
+            .donation-text {
+                width: 50%;
+                padding-left: 40px;
+            }
+        }
+        /* FINAL CTA SECTION - UPDATED TO MATCH THE NEW SCREENSHOT */
+        .final-cta-section {
+            background-color: #fff;
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            position: relative;
+        }
+        .final-cta-content {
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .final-cta-section h2 {
+            font-size: 2.6em;
+            color: #21242c;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            background-color: #1865f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        .cta-button.donate {
+            background-color: #1865f2;
+        }
+        .cta-button:hover {
+            background-color: #0041c4;
+        }
+        /* Yellow concentric circles decoration */
+        .yellow-circles {
+            position: absolute;
+            left: 25%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 200px;
+            z-index: 1;
+        }
+        /* Math paper with signature */
+        .math-paper {
+            position: absolute;
+            right: 20%;
+            bottom: 20%;
+            width: 300px;
+            height: 150px;
+            transform: rotate(-5deg);
+            z-index: 1;
+        }
+        /* SUPPORTERS SECTION - UPDATED TO MATCH SCREENSHOT */
+        .supporters-section {
+            position: relative;
+            padding: 120px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .final-cta-content {
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .final-cta-section h2 {
+            font-size: 2.6em;
+            color: #21242c;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            background-color: #1865f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        
+        .cta-button.donate {
+            background-color: #1865f2; /* Same blue as others */
+        }
+        
+        .cta-button:hover {
+            background-color: #0041c4;
+        }
+        
+        /* Yellow concentric circles decoration */
+        .yellow-circles {
+            position: absolute;
+            left: 25%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 200px;
+            z-index: 1;
+        }
+        
+        /* Math paper and signature decoration */
+        .math-paper {
+            position: absolute;
+            right: 20%;
+            bottom: 20%;
+            width: 300px;
+            height: 150px;
+            transform: rotate(-5deg);
+            z-index: 1;
+        }
+
+        /* SUPPORTERS SECTION - UPDATED TO MATCH SCREENSHOT */
+        .supporters-section {
+            position: relative;
+            padding: 120px 20px 80px;
+            max-width: 100%;
+            background-color: #f7f9fa;
+            overflow: hidden;
+        }
+        
+        /* Added gray wave at the top */
+        .supporters-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        .supporters-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .supporters-section h2 {
+            text-align: center;
+            font-size: 2.2em;
+            color: #21242c;
+            margin-bottom: 80px;
+            font-weight: 700;
+        }
+        
+        .supporters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 50px 80px;
+            justify-items: center;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .supporter-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 200px;
+            max-height: 60px;
+        }
+        
+        .supporter-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%);
+        }
+        
+        /* First row of logos */
+        .supporter-logo:nth-child(1) { grid-area: 1 / 1; }
+        .supporter-logo:nth-child(2) { grid-area: 1 / 2; }
+        .supporter-logo:nth-child(3) { grid-area: 1 / 3; }
+        .supporter-logo:nth-child(4) { grid-area: 1 / 4; }
+        
+        /* Second row of logos */
+        .supporter-logo:nth-child(5) { grid-area: 2 / 1; }
+        .supporter-logo:nth-child(6) { grid-area: 2 / 2; }
+        .supporter-logo:nth-child(7) { grid-area: 2 / 3; }
+        .supporter-logo:nth-child(8) { grid-area: 2 / 4; }
+
+        /* FOOTER STYLES - UPDATED TO MATCH SCREENSHOT */
+        .main-footer {
+            background-color: #0a2240; /* Dark navy blue */
+            padding: 80px 20px 40px;
+            color: #fff;
+            font-family: 'Lato', sans-serif;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .footer-mission {
+            line-height: 1.6;
+            margin-right: 60px;
+        }
+        
+        .footer-mission p {
+            margin: 0 0 20px;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .footer-mission p:last-child {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .footer-mission a {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-mission a:after {
+            content: "↗";
+            display: inline-block;
+            margin-left: 4px;
+            font-size: 0.9em;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.2s;
+        }
+        
+        .footer-column a:hover {
+            color: #fff;
+        }
+        
+        .footer-column a.external-link {
+            position: relative;
+            padding-right: 16px;
+        }
+        
+        .footer-column a.external-link:after {
+            content: "↗";
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 0.9em;
+        }
+        
+        .app-stores {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .app-store-badge {
+            max-width: 120px;
+            display: block;
+        }
+        
+        .footer-location {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            margin-top: 20px;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+        }
+        
+        .language-selector span {
+            margin-right: 10px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .language-dropdown {
+            color: #fff;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-dropdown:after {
+            content: "▼";
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 0.7em;
+        }
+        
+        .country-selector {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .country-selector span {
+            margin-right: 10px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .country-flag {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .footer-bottom {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+        }
+        
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #1b3454;
+            color: #fff;
+            transition: background-color 0.2s;
+        }
+        
+        .social-icon:hover {
+            background-color: #264570;
+        }
+        
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                row-gap: 40px;
+            }
+            
+            .footer-mission {
+                grid-column: 1 / -1;
+                margin-right: 0;
+            }
+            
+            .supporters-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-location, .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .language-selector {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .footer-social {
+                margin-top: 10px;
+            }
+        }
+    .underline-green {
+        border-bottom: 3px solid #7edba3;
+        padding-bottom: 2px;
+        display: inline;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="explore-dropdown">
+                <button class="explore-button">Explore <span class="explore-arrow">▾</span></button>
+                <div class="explore-dropdown-content">
+                    <a href="#">Courses</a>
+                    <a href="#">Practice</a>
+                    <a href="#">Tools</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+        </div>
+            <div class="logo">
+                <img src="khan academy logo.png" alt="Khan Academy Logo">
+                <span class="logo-text">Khan Academy</span>
+            </div>
+        <div class="header-right">
+            <a href="#" class="donate-button">
+                Donate
+                <svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.293 7.294-1.414-1.414L17.585 5H13V3h8z"/>
+                </svg>
+            </a>
+            <a href="#" class="login-button">Log in</a>
+            <a href="#" class="sign-up-button">Sign up</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-image">
+            <img src="hero_student_collage_IN_2x.png" alt="Person smiling and learning">
+        </div>
+        <div class="hero-left">
+            <h1 class="hero-title">For every student,<br> every classroom.<br> Real results.</h1>
+            <p class="hero-subtitle">We're a nonprofit with the mission to provide a free, world-class education for anyone, anywhere.</p>
+            <div class="hero-buttons">
+                <a href="#">Learners</a>
+                <a href="#">Teachers</a>
+                <a href="#">Parents</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accordion Section -->
+    <section class="accordion-courses-section">
+        <div class="accordion">
+            <!-- Math (NCERT) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon">
+                        <img src="math.png-444b34-128c.png" alt="Math NCERT Icon">
+                    </div>
+                    <div class="accordion-title">Math (NCERT)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Class 1</a>
+                        <a href="#">Class 7</a>
+                        <a href="#">Class 2</a>
+                        <a href="#">Class 8</a>
+                        <a href="#">Class 3</a>
+                        <a href="#">Class 9</a>
+                        <a href="#">Class 4</a>
+                        <a href="#">Class 10</a>
+                        <a href="#">Class 5</a>
+                        <a href="#">Class 11</a>
+                        <a href="#">Class 6 (2024)</a>
+                        <a href="#">Class 12</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Science (Bridge) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon science-icon">
+                        <img src="science_green.png-4ca7bf-128c.png" alt="Science Bridge Icon">
+                    </div>
+                    <div class="accordion-title">Science (Bridge)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Class 7</a>
+                        <a href="#">Class 11 Chemistry</a>
+                        <a href="#">Class 8</a>
+                        <a href="#">Class 11 Biology</a>
+                        <a href="#">Class 9</a>
+                        <a href="#">Class 12 Physics</a>
+                        <a href="#">Class 10</a>
+                        <a href="#">Class 12 Chemistry</a>
+                        <a href="#">Class 11 Physics</a>
+                        <a href="#">Class 12 Biology</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math (Bridge) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon">
+                        <img src="math.png-444b34-128c.png" alt="Math Bridge Icon">
+                    </div>
+                    <div class="accordion-title">Math (Bridge)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Class 6</a>
+                        <a href="#">Class 10</a>
+                        <a href="#">Class 7</a>
+                        <a href="#">Class 11</a>
+                        <a href="#">Class 8</a>
+                        <a href="#">Class 12</a>
+                        <a href="#">Class 9</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Science (Telangana) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon science-icon">
+                        <img src="science_green.png-4ca7bf-128c.png" alt="Science Telangana Icon">
+                    </div>
+                    <div class="accordion-title">Science (Telangana)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Class 7</a>
+                        <a href="#">Class 10 Biology</a>
+                        <a href="#">Class 8 Physical Science</a>
+                        <a href="#">Class 12 Physics</a>
+                        <a href="#">Class 8 Biology</a>
+                        <a href="#">Class 12 Chemistry</a>
+                        <a href="#">Class 9 Physical Science</a>
+                        <a href="#">Class 12 Botany</a>
+                        <a href="#">Class 9 Biology</a>
+                        <a href="#">Class 12 Zoology</a>
+                        <a href="#">Class 10 Physical Science</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Math (Telangana) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon">
+                        <img src="math.png-444b34-128c.png" alt="Math Telangana Icon">
+                    </div>
+                    <div class="accordion-title">Math (Telangana)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#" class="active">Class 7</a>
+                        <a href="#">Class 10</a>
+                        <a href="#">Class 8</a>
+                        <a href="#">Class 12</a>
+                        <a href="#">Class 9</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Math (Maharashtra) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon">
+                        <img src="math.png-444b34-128c.png" alt="Math Maharashtra Icon">
+                    </div>
+                    <div class="accordion-title">Math (Maharashtra)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Class 1</a>
+                        <a href="#">Class 6</a>
+                        <a href="#">Class 2</a>
+                        <a href="#">Class 7</a>
+                        <a href="#">Class 3</a>
+                        <a href="#">Class 8</a>
+                        <a href="#">Class 4</a>
+                        <a href="#">Class 9</a>
+                        <a href="#">Class 5</a>
+                        <a href="#">Class 10</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Science (NCERT) Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon science-icon">
+                        <img src="science_green.png-4ca7bf-128c.png" alt="Science NCERT Icon">
+                    </div>
+                    <div class="accordion-title">Science (NCERT)</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">NCERT (Hinglish)</a>
+                        <a href="#">Class 11 Chemistry</a>
+                        <a href="#">Class 6</a>
+                        <a href="#">Class 11 Biology</a>
+                        <a href="#">Class 7</a>
+                        <a href="#">Class 12 Physics</a>
+                        <a href="#">Class 8</a>
+                        <a href="#">Class 12 Chemistry</a>
+                        <a href="#">Class 9</a>
+                        <a href="#">Class 12 Biology</a>
+                        <a href="#">Class 10</a>
+                        <a href="#">Essentials (9-12)</a>
+                        <a href="#">Class 11 Physics</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- All boards Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon all-boards-icon">
+                        <img src="math.png-444b34-128c.png" alt="All Boards Icon">
+                    </div>
+                    <div class="accordion-title">All boards</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Punjab</a>
+                        <a href="#">Assam</a>
+                        <a href="#">Uttar Pradesh</a>
+                        <a href="#">Odisha</a>
+                        <a href="#">Maharashtra</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Explore more Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+<div class="accordion-icon explore-icon">
+    <img src="life_skills.png-1a4785-128c.png" alt="Explore More Icon">
+</div>
+                    <div class="accordion-title">Explore more</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Digital SAT</a>
+                        <a href="#">Finance</a>
+                        <a href="#">Grammar</a>
+                        <a href="#">Personal Finance</a>
+                        <a href="#">Intro to CS - Python</a>
+                        <a href="#">Financial Literacy</a>
+                        <a href="#">Computer Programming</a>
+                        <a href="#">Social Media Literacy</a>
+                        <a href="#">Computer Science</a>
+                        <a href="#">AI for Education</a>
+                        <a href="#">World History</a>
+                        <a href="#">Wireless Philosophy</a>
+                        <a href="#">Macroeconomics</a>
+                        <a href="#">Learn to Learn</a>
+                        <a href="#">Microeconomics</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Khan for Educators Accordion Item -->
+            <div class="accordion-item">
+                <div class="accordion-header active" tabindex="0">
+                    <div class="accordion-icon educators-icon">
+                        <img src="/api/placeholder/50/50" alt="Educators icon">
+                    </div>
+                    <div class="accordion-title">Khan for Educators</div>
+                    <div class="accordion-toggle">^</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="class-list">
+                        <a href="#">Khan for Educators (Beginner)</a>
+                        <a href="#">Khan for Educators (Mentors)</a>
+                        <a href="#">Khan for Educators (Advanced)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Khan Academy Works Section -->
+    <section class="why-khan-works">
+        <h2>Why Khan Academy works</h2>
+        
+        <div class="benefits-container">
+            <!-- Personalized Learning Column -->
+            <div class="benefit-column">
+                <div class="benefit-icon">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="50" fill="#F8C9D3"/>
+                        <path d="M35 30L45 40L55 30L65 40" stroke="#333" stroke-width="2"/>
+                        <circle cx="40" cy="60" r="10" fill="#FFF" stroke="#333" stroke-width="2"/>
+                        <rect x="55" y="50" width="20" height="20" fill="#000"/>
+                        <polygon points="40,30 50,20 60,30" fill="#333"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Personalized learning</h3>
+                <p class="benefit-description">
+                    Students practice at their own pace, first filling in gaps in their understanding and then accelerating their learning.
+                </p>
+            </div>
+            
+            <!-- Trusted Content Column -->
+            <div class="benefit-column">
+                <div class="benefit-icon">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="50" fill="#C5E1A5"/>
+                        <rect x="25" y="30" width="50" height="40" fill="#FFF" stroke="#333" stroke-width="2"/>
+                        <rect x="30" y="35" width="5" height="30" fill="#333"/>
+                        <rect x="40" y="35" width="5" height="30" fill="#333"/>
+                        <rect x="50" y="35" width="5" height="30" fill="#333"/>
+                        <rect x="60" y="35" width="5" height="30" fill="#333"/>
+                        <rect x="20" y="70" width="60" height="5" fill="#333"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Trusted content</h3>
+                <p class="benefit-description">
+                    Created by experts, Khan Academy's library of trusted, standards-aligned practice and lessons covers math K-12 through early college, grammar, science, history, SAT®, and more. It's all free for learners and teachers.
+                </p>
+            </div>
+            
+            <!-- Tools for Teachers Column -->
+            <div class="benefit-column">
+                <div class="benefit-icon">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="50" fill="#FFCC80"/>
+                        <rect x="30" y="40" width="10" height="30" fill="#333"/>
+                        <rect x="45" y="30" width="10" height="40" fill="#333"/>
+                        <rect x="60" y="50" width="10" height="20" fill="#333"/>
+                        <path d="M20 30L80 30" stroke="#333" stroke-width="2"/>
+                        <path d="M30 20L70 20" stroke="#333" stroke-width="2"/>
+                        <path d="M70 30L85 15" stroke="#333" stroke-width="2"/>
+                        <path d="M76 15L85 15L85 24" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Tools to empower teachers</h3>
+                <p class="benefit-description">
+                    With Khan Academy, teachers can identify gaps in their students' understanding, tailor instruction, and meet the needs of every student.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEACHERS Section - Updated to match the screenshot -->
+    <section class="teacher-testimonial-section">
+        <div class="testimonial-content">
+            <h2>TEACHERS</h2>
+            <div class="testimonial-block">
+                <div class="testimonial-image">
+                    <img src="faces_collage_2@2x.png" alt="Teachers collage with students in circular frames" style="width: 100%; height: auto;">
+                </div>
+                <div class="testimonial-text">
+                    <blockquote>
+                        <p>"I'm finally able to truly <span class="underline-green">differentiate</span> my classroom. This has been priceless for my students' engagement."</p>
+                        <div class="divider-line"></div>
+                        <cite>UDAYA LAKSHMI PALAPALA / Middle school Coordinator / Hyderabad, Telangana</cite>
+                    </blockquote>
+                    <div class="teacher-info">
+                        <p>We empower teachers to support their entire classroom. 90% of US teachers who have used Khan Academy have found us effective.</p>
+                        <a href="#" class="teacher-button">Teachers, start here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEARNERS AND STUDENTS Section - Updated to match the screenshot -->
+    <section class="learners-section">
+        <div class="learners-content">
+            <h2>LEARNERS AND STUDENTS</h2>
+            <div class="learners-block">
+                <div class="learners-image">
+                    <img src="laptop_collage@2x.png" alt="Educational content on a laptop with decorative elements">
+                </div>
+                <div class="learners-text">
+                    <h3>You can learn anything.</h3>
+                    <p>Build a deep, solid understanding in math, science, grammar, history, SAT®, and more.</p>
+                    <a href="#" class="learners-button">Learners, start here</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Testimonial Section - UPDATED TO MATCH NEW SCREENSHOT -->
+    <section class="student-testimonial-section">
+        <!-- Grey wave at the top -->
+        <div class="student-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none" style="width: 100%; height: 60px;">
+                <path fill="#fff" d="M0,40L48,53.3C96,67,192,93,288,96.7C384,100,480,80,576,70C672,60,768,60,864,56.7C960,53,1056,47,1152,43.3C1248,40,1344,40,1392,40L1440,40L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+        
+        <div class="student-testimonial-content" style="display: flex; flex-direction: column; align-items: center; max-width: 700px; margin: 0 auto; padding: 0 20px;">
+            <div class="student-quote" style="text-align: center; margin-bottom: 30px;">
+<p style="font-size: 2.6em; line-height: 1.4; color: #333; font-weight: 500; margin: 0; font-family: 'Lato', sans-serif;">When I was a child, I used to fear mathematics. But now, I am in love with mathematics because of Khan Academy.</p>
+            </div>
+            <div class="student-info" style="display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 300px; width: 100%;">
+                <div style="text-align: center;">
+                    <div class="student-name" style="font-size: 1.1em; font-weight: 700; color: #333; text-transform: uppercase; margin-bottom: 2px; font-family: 'Lato', sans-serif;">ANJALI</div>
+                    <div class="student-location" style="font-size: 0.9em; color: #666; font-style: italic; text-transform: uppercase; font-family: 'Lato', sans-serif;">GURUGRAM, HARYANA</div>
+                </div>
+                <div class="student-image" style="position: relative; width: 100px; height: 100px;">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; z-index: 1;">
+                        <path fill="#FF7A59" d="M50 0 L85 20 L75 75 L25 75 L15 20 Z"/>
+                    </svg>
+                    <img src="anjali-3.png" alt="Student Anjali" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: relative; z-index: 2; border: none; box-shadow: none;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation CTA Section -->
+    <section class="donation-cta-section">
+        <div class="donation-content">
+            <h2 class="uppercase-subtitle" style="font-size: 0.9em; font-weight: 600; color: #666; letter-spacing: 1.5px; margin-bottom: 10px;">TOGETHER WE CAN MAKE A DIFFERENCE</h2>
+            <div class="donation-block" style="display: flex; align-items: center; gap: 40px;">
+                <div class="donation-image" style="max-width: 420px; clip-path: polygon(50% 0%, 90% 25%, 75% 75%, 25% 75%, 10% 25%);">
+                    <img src="math-unicorn-donate-collage.png" alt="Children learning" style="width: 100%; height: auto; border-radius: 0; object-fit: cover;">
+                </div>
+                <div class="donation-text" style="max-width: 480px; text-align: left;">
+                    <h1 class="underline-green" style="font-size: 2.6em; font-weight: 700; margin-bottom: 20px;">Every child deserves the chance to learn.</h1>
+                    <p style="font-size: 1.2em; line-height: 1.6; color: #333; margin-bottom: 30px;">Across the globe, 617 million children are missing basic math and reading skills. We're a nonprofit delivering the education they need, and we need your help. You can change the course of a child's life.</p>
+                    <a href="#" class="hero-buttons" style="display: inline-block; padding: 14px 30px; background-color: #1865f2; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">Give them the chance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section - Updated to match new screenshot -->
+    <section class="final-cta-section">
+        <!-- Yellow concentric circles decoration -->
+        <div class="yellow-circles">
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="100" fill="#FFC107" fill-opacity="0.2"/>
+                <circle cx="100" cy="100" r="85" fill="#FFC107" fill-opacity="0.3"/>
+                <circle cx="100" cy="100" r="70" fill="#FFC107" fill-opacity="0.4"/>
+                <circle cx="100" cy="100" r="55" fill="#FFC107" fill-opacity="0.5"/>
+                <circle cx="100" cy="100" r="40" fill="#FFC107" fill-opacity="0.6"/>
+            </svg>
+        </div>
+        
+        <!-- Math paper with signature -->
+        <div class="math-paper">
+            <svg width="300" height="150" viewBox="0 0 300 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="130" fill="#f8f9fa" transform="rotate(-3 30 20)"/>
+                <path d="M30 40 L280 40" stroke="#ccc" stroke-width="1" opacity="0.5" transform="rotate(-3 30 20)"/>
+                <path d="M30 60 L280 60" stroke="#ccc" stroke-width="1" opacity="0.5" transform="rotate(-3 30 20)"/>
+                <path d="M30 80 L280 80" stroke="#ccc" stroke-width="1" opacity="0.5" transform="rotate(-3 30 20)"/>
+                <path d="M30 100 L280 100" stroke="#ccc" stroke-width="1" opacity="0.5" transform="rotate(-3 30 20)"/>
+                <path d="M180 110 C220 90, 250 120, 280 80" stroke="#000" stroke-width="2" transform="rotate(-3 30 20)"/>
+            </svg>
+        </div>
+        
+        <div class="final-cta-content">
+            <h2>Join Khan Academy today</h2>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">Learners</a>
+                <a href="#" class="cta-button">Teachers</a>
+                <a href="#" class="cta-button">Parents</a>
+                <a href="#" class="cta-button">Give today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORTERS SECTION - UPDATED TO MATCH SCREENSHOT -->
+    <section class="supporters-section">
+        <!-- Grey wave at the top -->
+        <div class="supporters-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none" style="width: 100%; height: 100px;">
+                <path fill="#fff" d="M0,40L48,53.3C96,67,192,93,288,96.7C384,100,480,80,576,70C672,60,768,60,864,56.7C960,53,1056,47,1152,43.3C1248,40,1344,40,1392,40L1440,40L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+        
+        <div class="supporters-content">
+            <h2>Key supporters</h2>
+            <div class="supporters-grid">
+                <!-- Row 1 -->
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=BANK+OF+AMERICA" alt="Bank of America logo">
+                </div>
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=CollegeBoard" alt="CollegeBoard logo">
+                </div>
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=Ann+&+John+Doerr" alt="Ann & John Doerr">
+                </div>
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=GATES+FOUNDATION" alt="Gates Foundation logo">
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=FUNDACAO+LEMANN" alt="Fundação Lemann logo">
+                </div>
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=Carlos+Rodriguez-Pastor" alt="Carlos Rodriguez-Pastor">
+                </div>
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=TATA+TRUSTS" alt="TATA TRUSTS logo">
+                </div>
+                <div class="supporter-logo">
+                    <img src="/api/placeholder/180x40?text=VALHALLA+FOUNDATION" alt="VALHALLA FOUNDATION logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER - UPDATED TO MATCH SCREENSHOT -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-mission">
+                    <p>Our mission is to provide a free, world-class education to anyone, anywhere.</p>
+                    <p>Khan Academy is a 501(c)(3) nonprofit organization. <a href="#">Donate</a> or <a href="#">volunteer</a> today!</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#" class="external-link">Impact</a></li>
+                        <li><a href="#">Our team</a></li>
+                        <li><a href="#">Our interns</a></li>
+                        <li><a href="#">Our content specialists</a></li>
+                        <li><a href="#">Our leadership</a></li>
+                        <li><a href="#">Our supporters</a></li>
+                        <li><a href="#">Our contributors</a></li>
+                        <li><a href="#">Our finances</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Internships</a></li>
+                        <li><a href="#">Cookie Preferences</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">Help center</a></li>
+                        <li><a href="#">Support community</a></li>
+                        <li><a href="#">Share your story</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                    <h3>Download our apps</h3>
+                    <div class="app-stores">
+                        <a href="#" class="app-store-badge">
+                            <img src="/api/placeholder/120x40?text=App+Store" alt="Download on the App Store">
+                        </a>
+                        <a href="#" class="app-store-badge">
+                            <img src="/api/placeholder/120x40?text=Google+Play" alt="Get it on Google Play">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Courses</h3>
+                    <ul>
+                        <li><a href="#">Math (NCERT)</a></li>
+                        <li><a href="#">Math (Bridge)</a></li>
+                        <li><a href="#">Math (Telangana)</a></li>
+                        <li><a href="#">Math (Maharashtra)</a></li>
+                        <li><a href="#">Science (NCERT)</a></li>
+                        <li><a href="#">Science (Bridge)</a></li>
+                        <li><a href="#">Science (Telangana)</a></li>
+                        <li><a href="#">All boards</a></li>
+                        <li><a href="#">Explore more</a></li>
+                        <li><a href="#">Khan for Educators</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-location">
+                <div class="language-section">
+                    <div class="language-selector">
+                        <span>Language:</span>
+                        <div class="language-dropdown">English</div>
+                    </div>
+                </div>
+                <div class="country-selector">
+                    <span>Country:</span>
+                    <a href="#" class="country-flag">🇺🇸 U.S.</a>
+                    <a href="#" class="country-flag">🇮🇳 India</a>
+                    <a href="#" class="country-flag">🇲🇽 Mexico</a>
+                    <a href="#" class="country-flag">🇧🇷 Brazil</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">© 2025 Khan Academy</div>
+                <div class="footer-links">
+                    <a href="#">Terms of use</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Notice</a>
+                    <a href="#">Accessibility Statement</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 9.99 9.99 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced JavaScript for accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const accordionContents = document.querySelectorAll('.accordion-content');
+            
+            // Show all accordion content by default
+            accordionContents.forEach(content => {
+                content.style.display = 'block';
+            });
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                    } else {
+                        content.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
